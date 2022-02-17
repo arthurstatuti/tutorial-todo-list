@@ -2,9 +2,19 @@
 /* eslint-disable no-console */
 import React from 'react';
 
-function Form({ inputText, setInputText }) {
+function Form({
+  inputText, setInputText, todos, setTodos,
+}) {
   const inputTextHandler = ({ target: { value } }) => {
     setInputText(value);
+  };
+
+  const submitTodoHandler = (event) => {
+    event.preventDefault();
+    setTodos([
+      ...todos, { completed: false, id: Math.random() * 1000, text: inputText },
+    ]);
+    setInputText('');
   };
 
   return (
@@ -12,7 +22,7 @@ function Form({ inputText, setInputText }) {
 
       <input value={inputText} onChange={inputTextHandler} type="text" className="todo-input" />
 
-      <button className="todo-button" type="submit">
+      <button onClick={submitTodoHandler} className="todo-button" type="submit">
         <i className="fas fa-plus-square" />
       </button>
 
