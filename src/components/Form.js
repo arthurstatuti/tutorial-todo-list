@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 import React from 'react';
@@ -11,10 +12,16 @@ function Form({
 
   const submitTodoHandler = (event) => {
     event.preventDefault();
-    setTodos([
-      ...todos, { completed: false, id: Math.random() * 1000, text: inputText },
-    ]);
-    setInputText('');
+
+    if (inputText === '') {
+      alert('Type something to do');
+    } else {
+      setTodos([
+        ...todos, { completed: false, id: Math.random() * 1000, text: inputText },
+      ]);
+
+      setInputText('');
+    }
   };
 
   const statusHandler = ({ target: { value } }) => {
